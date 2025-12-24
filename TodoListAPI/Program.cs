@@ -10,6 +10,7 @@ using TodoListAPI.Repositories;
 using TodoListAPI.Repositories.Interfaces;
 using TodoListAPI.Services;
 using TodoListAPI.Middleware;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,5 +75,23 @@ app.UseAuthorization();
 app.UseGlobalExceptionHandler();
 
 app.MapControllers();
-
+if (app.Environment.IsDevelopment())
+{
+    app.Lifetime.ApplicationStarted.Register(() =>
+    {
+        try
+        {
+            var url = "https://localhost:7215/swagger/index.html";
+            var psi = new ProcessStartInfo(url)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
+        catch
+        {
+            // Если что-то пошло не так — просто молчим
+        }
+    });
+}
 app.Run();
