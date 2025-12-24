@@ -9,6 +9,7 @@ using TodoListAPI.Profiles;
 using TodoListAPI.Repositories;
 using TodoListAPI.Repositories.Interfaces;
 using TodoListAPI.Services;
+using TodoListAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseGlobalExceptionHandler();
 
 app.MapControllers();
 

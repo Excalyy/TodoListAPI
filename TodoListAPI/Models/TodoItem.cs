@@ -16,7 +16,7 @@ namespace TodoListAPI.Models
 
         public bool IsCompleted { get; set; } = false;
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
 
         public DateTime? DueDate { get; set; }
 
